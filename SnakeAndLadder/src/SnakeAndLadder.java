@@ -14,27 +14,28 @@ import java.util.Random;
 
 public class SnakeAndLadder extends JFrame implements ActionListener{
 
- JLabel lblComp = new JLabel("Computer");
- JButton btnYou = new JButton("Play");
+ JLabel lblPlayer2 = new JLabel("Player 2");
+ JLabel lblPlayer1 = new JLabel("Player 1");
+ JButton btnPlay = new JButton("Play");
  JButton newGame = new JButton("New Game");
  
- JLabel lblCompNo = new JLabel("");
- JLabel lblYouNo = new JLabel("");
+ JLabel lblPlayerNo2 = new JLabel("");
+ JLabel lblPlayerNo1 = new JLabel("");
  
- JLabel lblCompPos = new JLabel("");
- JLabel lblYouPos = new JLabel("");
+ JLabel lblPlayerPos2 = new JLabel("");
+ JLabel lblPlayerPos1 = new JLabel("");
  
  HashMap<Integer,Integer> ladder = new HashMap<Integer,Integer>();
  HashMap<Integer,Integer> snake = new HashMap<Integer,Integer>();
  
- int youCount = 1;
- int compCount = 1;
+ int playerCount1 = 1;
+ int playerCount2 = 1;
  
  int w=15,h=15;
  int x=0,y=0;
  
- StringBuffer compList = null;
- StringBuffer youList = new StringBuffer();
+ StringBuffer playerList2 = null;
+ StringBuffer playerList1 = new StringBuffer();
   
  Random dies = new Random();
  
@@ -46,42 +47,48 @@ public class SnakeAndLadder extends JFrame implements ActionListener{
   setResizable(false);
   setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   //getContentPane().setBackground(Color.LIGHT_GRAY);
-  setBounds(0, 0, 700, 580);
+  setBounds(0, 0, 780, 580);
   JLabel background=new JLabel(new ImageIcon("C:\\Users\\Jerry\\Documents\\NetBeansProjects\\SnakeAndLadder\\src\\bord2.jpg"));
-  background.setBounds(0, -10, 550, 570);
+  background.setBounds(0, 0, 550, 570);
   add(background);
   
-  btnYou.setBounds(560, 200, 60, 30);
-  add(btnYou);
+  btnPlay.setBounds(620, 200, 60, 30);
+  add(btnPlay);
   
-  lblComp.setBounds(560, 250, 60, 30);
-  add(lblComp);
+  lblPlayer1.setBounds(580,250,60,30);
+  add(lblPlayer1);
   
-  lblYouNo.setBounds(640, 200, 60, 30);
-  lblYouNo.setOpaque(true);
-  lblYouNo.setBackground(Color.BLUE);
-  lblYouNo.setForeground(Color.GREEN);
-  add(lblYouNo);
+  lblPlayer2.setBounds(580, 300, 60, 30);
+  add(lblPlayer2);
   
-  lblCompNo.setBounds(640, 250, 60, 30);
-  lblCompNo.setOpaque(true);
-  lblCompNo.setBackground(Color.RED);
-  lblCompNo.setForeground(Color.GREEN);
-  add(lblCompNo);
   
-  newGame.setBounds(560, 140, 120, 30);
+  lblPlayerNo1.setBounds(660, 250, 60, 30);
+  
+  lblPlayerNo1.setOpaque(true);
+  lblPlayerNo1.setBackground(Color.BLUE);
+  lblPlayerNo1.setForeground(Color.GREEN);
+  add(lblPlayerNo1);
+  
+  lblPlayerNo2.setBounds(660, 300, 60, 30);
+  lblPlayerNo2.setOpaque(true);
+  lblPlayerNo2.setBackground(Color.RED);
+  
+  lblPlayerNo2.setForeground(Color.GREEN);
+  add(lblPlayerNo2);
+  
+  newGame.setBounds(590, 150, 120, 30);
   add(newGame);
-  coinPosition(1,compCount);
-  lblCompPos.setBounds(x, y, w, h);
-  lblCompPos.setOpaque(true);
-  lblCompPos.setBackground(Color.RED);
-  background.add(lblCompPos);
+  coinPosition(1,playerCount2);
+  lblPlayerPos2.setBounds(x, y, w, h);
+  lblPlayerPos2.setOpaque(true);
+  lblPlayerPos2.setBackground(Color.RED);
+  background.add(lblPlayerPos2);
   
-  coinPosition(2,youCount);
-  lblYouPos.setBounds(x, y, w, h);
-  lblYouPos.setOpaque(true);
-  lblYouPos.setBackground(Color.BLUE);
-  background.add(lblYouPos);
+  coinPosition(2,playerCount1);
+  lblPlayerPos1.setBounds(x, y, w, h);
+  lblPlayerPos1.setOpaque(true);
+  lblPlayerPos1.setBackground(Color.BLUE);
+  background.add(lblPlayerPos1);
   
   repaint();
   
@@ -101,7 +108,7 @@ public class SnakeAndLadder extends JFrame implements ActionListener{
   snake.put(99, 69);
   
   newGame.addActionListener(this);
-  btnYou.addActionListener(this);
+  btnPlay.addActionListener(this);
   
   
  }
@@ -111,52 +118,52 @@ public class SnakeAndLadder extends JFrame implements ActionListener{
   }
   public void actionPerformed(ActionEvent e) {
    if (e.getSource() == newGame) {
-    youCount = 1;
-    compCount = 1;
-    coinPosition(1,compCount);
-    lblCompPos.setBounds(x, y, w, h);
-    coinPosition(2,youCount);
-    lblYouPos.setBounds(x, y, w, h);
-    lblYouNo.setText("");
-    lblCompNo.setText("");
-    btnYou.setVisible(true);
+    playerCount1 = 1;
+    playerCount2 = 1;
+    coinPosition(1,playerCount2);
+    lblPlayerPos2.setBounds(x, y, w, h);
+    coinPosition(2,playerCount1);
+    lblPlayerPos1.setBounds(x, y, w, h);
+    lblPlayerNo1.setText("");
+    lblPlayerNo2.setText("");
+    btnPlay.setVisible(true);
     repaint();
-   } else if (e.getSource() == btnYou) {
-    compList = new StringBuffer();
+   } else if (e.getSource() == btnPlay) {
+    playerList2 = new StringBuffer();
    
     int playAgain = playDies(2);
-    coinPosition(2,youCount);
-    lblYouPos.setBounds(x, y, w, h);
+    coinPosition(2,playerCount1);
+    lblPlayerPos1.setBounds(x, y, w, h);
     repaint();
-    if(ladder.containsKey(youCount)) {
-     youCount = ladder.get(youCount);
-    } else if (snake.containsKey(youCount)){
-     youCount = snake.get(youCount);
+    if(ladder.containsKey(playerCount1)) {
+     playerCount1 = ladder.get(playerCount1);
+    } else if (snake.containsKey(playerCount1)){
+     playerCount1 = snake.get(playerCount1);
     }
-    coinPosition(2,youCount);
-    lblYouPos.setBounds(x, y, w, h);
+    coinPosition(2,playerCount1);
+    lblPlayerPos1.setBounds(x, y, w, h);
     repaint();
-    if(youCount == 100) {
-     btnYou.setVisible(false);
-     JOptionPane.showMessageDialog(this, "You win");
+    if(playerCount1 == 100) {
+     btnPlay.setVisible(false);
+     JOptionPane.showMessageDialog(this, "Player1 wins");
     } else if(playAgain == 0) {
-     youList = new StringBuffer();
+     playerList1 = new StringBuffer();
      do {
       playAgain = playDies(1);
-      coinPosition(1,compCount);
-      lblCompPos.setBounds(x, y, w, h);
+      coinPosition(1,playerCount2);
+      lblPlayerPos2.setBounds(x, y, w, h);
       repaint();
-      if(ladder.containsKey(compCount)) {
-       compCount = ladder.get(compCount);
-      } else if (snake.containsKey(compCount)){
-       compCount = snake.get(compCount);
+      if(ladder.containsKey(playerCount2)) {
+       playerCount2 = ladder.get(playerCount2);
+      } else if (snake.containsKey(playerCount2)){
+       playerCount2 = snake.get(playerCount2);
       }
-      coinPosition(1,compCount);
-      lblCompPos.setBounds(x, y, w, h);
+      coinPosition(1,playerCount2);
+      lblPlayerPos2.setBounds(x, y, w, h);
       repaint();
-      if(compCount == 100) {
-       btnYou.setVisible(false);
-       JOptionPane.showMessageDialog(this, "Computer win");
+      if(playerCount2 == 100) {
+       btnPlay.setVisible(false);
+       JOptionPane.showMessageDialog(this, "Player2 win");
        break;
       }
      
@@ -173,21 +180,21 @@ public class SnakeAndLadder extends JFrame implements ActionListener{
     diesResult = dies.nextInt(7);
    }
    if(player == 2){
-    youList.append(String.valueOf(diesResult));
-    youList.append(",");
-    lblYouNo.setText(youList.toString());
-    if(youCount+diesResult <= 100) {
-     youCount = youCount+diesResult;
+    playerList1.append(String.valueOf(diesResult));
+    playerList1.append(",");
+    lblPlayerNo1.setText(playerList1.toString());
+    if(playerCount1+diesResult <= 100) {
+     playerCount1 = playerCount1+diesResult;
      if(diesResult == 1 || diesResult == 5 || diesResult == 6) {
       playAgain = 1;
      }
     }
    } else {
-    compList.append(String.valueOf(diesResult));
-    compList.append(",");
-    lblCompNo.setText(compList.toString());
-    if(compCount+diesResult <= 100) {
-     compCount = compCount+diesResult;
+    playerList2.append(String.valueOf(diesResult));
+    playerList2.append(",");
+    lblPlayerNo2.setText(playerList2.toString());
+    if(playerCount2+diesResult <= 100) {
+     playerCount2 = playerCount2+diesResult;
      if(diesResult == 1 || diesResult == 5 || diesResult == 6) {
       playAgain = 1;
      }
